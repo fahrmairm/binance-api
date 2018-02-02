@@ -3,9 +3,10 @@ package binance
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/websocket"
 	"net/http"
 	"strings"
+
+	"github.com/gorilla/websocket"
 )
 
 type BinanceClient struct {
@@ -314,7 +315,7 @@ func (b *BinanceClient) KlinesWS(symbol string, interval KlineInterval) (*Klines
 
 // TradesWS opens websocket with trades updates for the given symbol
 func (b *BinanceClient) TradesWS(symbol string) (*TradesWS, error) {
-	addr := strings.ToLower(symbol) + "@aggTrade"
+	addr := strings.ToLower(symbol) + "@trade"
 	conn, _, err := b.dialer.Dial(wsAddress+addr, nil)
 	if err != nil {
 		return nil, err
